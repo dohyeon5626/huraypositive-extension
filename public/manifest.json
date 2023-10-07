@@ -1,0 +1,17 @@
+{
+    "name": "Huraypositive",
+    "description": "휴레이포지티브를 위한 확장프로그램",
+    "version": "1.0.0",
+    "manifest_version": 3,
+
+    "permissions": ["scripting"],
+    "host_permissions" : ["https://*.google.com/*"],
+
+    "action": {
+        "default_popup": "popup.html"
+    },
+
+    "background": {
+        "service_worker": "background.js"
+    }
+}
