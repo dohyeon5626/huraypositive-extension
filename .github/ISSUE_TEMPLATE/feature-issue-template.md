@@ -2,7 +2,7 @@
 name: Feature issue template
 about: 기능 추가 및 변경
 title: 'Feature: <-- 기능 설명 -->'
-labels: ''
+labels: feature
 assignees: ''
 
 ---
