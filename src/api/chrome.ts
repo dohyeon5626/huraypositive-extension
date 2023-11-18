@@ -13,10 +13,10 @@ export const executeScript = (tabId: number, file: string) => {
     });
 }
 
-export const getGoogleOauthToken = (): Promise<string> => {
-    return new Promise<string>(resolve => {
-        chrome.identity.getAuthToken({'interactive': true}, (token) => {
-            resolve(token!!);
+export const getGoogleOauthToken = (): Promise<string|undefined> => {
+    return new Promise<string|undefined>(resolve => {
+        chrome.identity.getAuthToken({interactive: true}, (token) => {
+            resolve(token);
         });
     })
 }
