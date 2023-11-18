@@ -12,3 +12,11 @@ export const executeScript = (tabId: number, file: string) => {
         files: [file]
     });
 }
+
+export const getGoogleOauthToken = (): Promise<string> => {
+    return new Promise<string>(resolve => {
+        chrome.identity.getAuthToken({'interactive': true}, (token) => {
+            resolve(token!!);
+        });
+    })
+}
