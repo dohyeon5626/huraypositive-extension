@@ -4,7 +4,7 @@
     "version": "1.0.0",
     "manifest_version": 3,
 
-    "permissions": ["scripting"],
+    "permissions": ["scripting", "identity"],
     "host_permissions" : ["https://*.google.com/*"],
 
     "action": {
@@ -13,5 +13,9 @@
 
     "background": {
         "service_worker": "background.js"
+    },
+
+    "oauth2": {
+        "scopes":["https://www.googleapis.com/auth/userinfo.email"]
     }
 }
