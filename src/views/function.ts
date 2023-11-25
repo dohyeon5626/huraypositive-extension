@@ -1,3 +1,4 @@
+import { saveFunctionActive } from "../api/chrome";
 import { BaseTag } from "./base";
 
 export class FunctionBox extends BaseTag {
@@ -10,6 +11,7 @@ export class FunctionBox extends BaseTag {
 
 export class Function extends BaseTag {
 
+    private functionName: string;
     private isActive: boolean;
 
     private static getCheckBox (isActive: boolean): string {
@@ -23,13 +25,14 @@ export class Function extends BaseTag {
         `;
     }
 
-    constructor(isActive: boolean, functionName: string) {
+    constructor(functionName: string, isActive: boolean) {
         super(`
             <div class="function">
                 <div class="function-check-box">${Function.getCheckBox(isActive)}</div>
                 <p class="function-name">${functionName}</p>
             </div>`
         );
+        this.functionName = functionName;
         this.isActive = isActive;
         this.content.onclick = () => {
             this.changeActive();
@@ -39,6 +42,7 @@ export class Function extends BaseTag {
     public changeActive() {
         this.isActive = !this.isActive;
         this.content.querySelector(".check-box > path")?.setAttribute("fill", this.isActive ? "#4830F2" : "#7E8798");
+        saveFunctionActive(this.functionName, this.isActive);
     }
 
 }
