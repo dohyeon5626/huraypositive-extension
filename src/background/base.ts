@@ -1,4 +1,4 @@
-import { saveFunctionActiveMap } from "../api/chrome";
+import { saveFunctionActiveMap, getUserEmail } from "../api/chrome";
 import { FUNCTION } from "../code";
 
 const defaultFunctionActiveMap = new Map([
@@ -9,5 +9,12 @@ const defaultFunctionActiveMap = new Map([
 chrome.runtime.onInstalled.addListener(({reason}) => {
     if (reason === 'install') {
         saveFunctionActiveMap(defaultFunctionActiveMap);
+        getUserEmail(
+            (email) => {
+                if (!email.includes("huray.net")) { 
+                    chrome.tabs.create({url: 'validation.html'});
+                }
+            }
+        );
     }
 });
