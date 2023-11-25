@@ -44,3 +44,9 @@ export const getGoogleOauthToken = (): Promise<string|undefined> => {
         });
     });
 }
+
+export const getUserEmail = (func: (email: string) => void) => {
+    chrome.identity.getProfileUserInfo({ accountStatus: chrome.identity.AccountStatus.ANY }, function (user_info) {
+        func(user_info.email);
+    })
+}
