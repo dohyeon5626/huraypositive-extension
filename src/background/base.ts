@@ -1,8 +1,9 @@
 import { saveFunctionActiveMap } from "../api/chrome";
+import { FUNCTION } from "../code";
 
 const defaultFunctionActiveMap = new Map([
-    ["구글 캘린더 회의실 정보 보기", true],
-    ["스프레드시트 시트 검색바 추가", true]
+    [FUNCTION.MEETING_ROOM, true],
+    [FUNCTION.SPREADSHEET_SEARCH, true]
 ]);
 
 chrome.runtime.onInstalled.addListener(({reason}) => {
