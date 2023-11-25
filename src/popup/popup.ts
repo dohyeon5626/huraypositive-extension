@@ -1,6 +1,6 @@
 import { getFunctionActiveMap, getUserEmail } from '../api/chrome';
 import { Function, FunctionBox } from '../views/function';
-import { TextBox } from '../views/text';
+import { TextBox, TextType } from '../views/text';
 
 const box = new FunctionBox();
 getUserEmail(
@@ -12,7 +12,7 @@ getUserEmail(
                 });
             });
         }else {
-            box.addTag(new TextBox('Huray Positive 계정만 사용이 가능합니다.'));
+            box.addTag(new TextBox('Huray Positive 계정만 사용이 가능합니다.', TextType.INVALID));
         }
         box.arrangeBase();
     }
