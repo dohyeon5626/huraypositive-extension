@@ -45,8 +45,10 @@ export const getGoogleOauthToken = (): Promise<string|undefined> => {
     });
 }
 
-export const getUserEmail = (func: (email: string) => void) => {
-    chrome.identity.getProfileUserInfo({ accountStatus: chrome.identity.AccountStatus.ANY }, function (user_info) {
-        func(user_info.email);
-    })
+export const getUserEmail = (): Promise<string> => { 
+    return new Promise<string>(resolve => {
+        chrome.identity.getProfileUserInfo({ accountStatus: chrome.identity.AccountStatus.ANY }, function (user_info) {
+            resolve(user_info.email);
+        });
+    });
 }

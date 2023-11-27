@@ -6,15 +6,13 @@ const defaultFunctionActiveMap = new Map([
     [FUNCTION.SPREADSHEET_SEARCH, true]
 ]);
 
-chrome.runtime.onInstalled.addListener(({reason}) => {
+chrome.runtime.onInstalled.addListener(({ reason }) => {
     if (reason === 'install') {
         saveFunctionActiveMap(defaultFunctionActiveMap);
-        getUserEmail(
-            (email) => {
-                if (!email.includes("huray.net")) { 
-                    chrome.tabs.create({url: 'validation.html'});
-                }
+        getUserEmail().then(email => {
+            if (!email.includes("huray.net")) {
+                chrome.tabs.create({ url: 'validation.html' });
             }
-        );
+        })
     }
 });

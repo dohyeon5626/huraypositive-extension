@@ -6,6 +6,7 @@ export enum TextType {
 export class TextBox extends BaseTag {
     
     constructor(text: string, type: TextType) {
-        super('<div id="text-box" class="'+type+'">'+text+'</div>');
+        super(`<div id="text-box" class="${type}"> ${text} </div>`);
     }
+
 }
