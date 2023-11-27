@@ -1,4 +1,4 @@
-import { saveFunctionActiveMap } from "../api/chrome";
+import { saveFunctionActiveMap, getUserEmail } from "../api/chrome";
 import { FUNCTION } from "../code";
 
 const defaultFunctionActiveMap = new Map([
@@ -6,8 +6,13 @@ const defaultFunctionActiveMap = new Map([
     [FUNCTION.SPREADSHEET_SEARCH, true]
 ]);
 
-chrome.runtime.onInstalled.addListener(({reason}) => {
+chrome.runtime.onInstalled.addListener(({ reason }) => {
     if (reason === 'install') {
         saveFunctionActiveMap(defaultFunctionActiveMap);
+        getUserEmail().then(email => {
+            if (!email.includes("huray.net")) {
+                chrome.tabs.create({ url: 'validation.html' });
+            }
+        })
     }
 });

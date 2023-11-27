@@ -2,11 +2,9 @@ import { saveFunctionActive } from "../api/chrome";
 import { BaseTag } from "./base";
 
 export class FunctionBox extends BaseTag {
-
     constructor() {
         super(`<div id="function-box"></div>`);
     }
-
 }
 
 export class Function extends BaseTag {

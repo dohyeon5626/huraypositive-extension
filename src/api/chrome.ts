@@ -27,7 +27,7 @@ export const getFunctionActiveMap = (): Promise<Map<string, boolean>> => {
 
 export const saveFunctionActiveMap = (functionActiveMap: Map<string, boolean>) => {
     return new Promise<void>((resolve) => {
-        chrome.storage.sync.set({functionActiveMap: Object.fromEntries(functionActiveMap)}, resolve);
+        chrome.storage.sync.set({ functionActiveMap: Object.fromEntries(functionActiveMap) }, resolve);
     });
 }
 
@@ -37,10 +37,20 @@ export const saveFunctionActive = async (functionName: string, isFunctionActive:
     saveFunctionActiveMap(functionActiveMap);
 }
 
-export const getGoogleOauthToken = (): Promise<string|undefined> => {
-    return new Promise<string|undefined>(resolve => {
-        chrome.identity.getAuthToken({interactive: true}, (token) => {
+export const getGoogleOauthToken = (): Promise<string | undefined> => {
+    return new Promise<string | undefined>(resolve => {
+        chrome.identity.getAuthToken({ interactive: true }, (token) => {
             resolve(token);
         });
+    });
+}
+
+export const getUserEmail = (): Promise<string> => {
+    return new Promise<string>(resolve => {
+        chrome.identity.getProfileUserInfo(
+            { accountStatus: chrome.identity.AccountStatus.ANY },
+            (user_info) => {
+                resolve(user_info.email);
+            });
     });
 }
