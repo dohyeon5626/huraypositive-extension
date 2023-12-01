@@ -6,8 +6,8 @@ const CopyPlugin = require('copy-webpack-plugin');
 module.exports = {
    mode: "production",
    entry: {
-      "background": ["./src/background/base.ts", "./src/background/router.ts"],
-      "content": ["./src/content/content.ts"],
+      "background": ["./src/background/base.ts", "./src/background/router.ts", "./src/message/message_receiver.ts"],
+      "calendar-content": ["./src/content/calendar.ts"],
       "popup": ["./src/popup/popup.ts"]
    },
    output: {

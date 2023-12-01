@@ -13,7 +13,7 @@ export const executeScript = (tabId: number, file: string) => {
     });
 }
 
-export const getFunctionActiveMap = (): Promise<Map<string, boolean>> => {
+export const getFunctionActiveMap = () => {
     return new Promise<Map<string, boolean>>((resolve) => {
         chrome.storage.sync.get(['functionActiveMap'], (result) => {
             if (result.functionActiveMap) {
@@ -37,10 +37,12 @@ export const saveFunctionActive = async (functionName: string, isFunctionActive:
     saveFunctionActiveMap(functionActiveMap);
 }
 
-export const getGoogleOauthToken = (): Promise<string | undefined> => {
-    return new Promise<string | undefined>(resolve => {
+export const getGoogleOauthToken = () => {
+    return new Promise<string>(resolve => {
         chrome.identity.getAuthToken({ interactive: true }, (token) => {
-            resolve(token);
+            if (token) { // FIXME 토큰이 빈 값으로 올때가 있는데 재로그인 하는 방법을 찾아봐야함
+                resolve(token);
+            }
         });
     });
 }
@@ -52,5 +54,15 @@ export const getUserEmail = (): Promise<string> => {
             (user_info) => {
                 resolve(user_info.email);
             });
+    });
+}
+
+export const addMessageListener = (func: (request: any, callback: (response: any) => void) => void) => {
+    chrome.runtime.onMessage.addListener((request, sender, callback) => func(request, callback));
+}
+
+export const sendMessage = (action: any) => {
+    return new Promise<any>(resolve => {
+        chrome.runtime.sendMessage(action, value => resolve(value));
     });
 }
