@@ -6,11 +6,23 @@ export const addTabUpdatedListener = (func: (url: string, tabId: number) => void
     });
 }
 
+export const insertCss = (tabId: number, file: string) => {
+    chrome.scripting.insertCSS({
+        target: { tabId: tabId },
+        files: [file]
+    });
+}
+
 export const executeScript = (tabId: number, file: string) => {
     chrome.scripting.executeScript({
         target: { tabId: tabId },
         files: [file]
     });
+}
+
+export const applySheetAndScript = (tabId: number, css: string, js: string) => {
+    insertCss(tabId, css);
+    executeScript(tabId, js);
 }
 
 export const getFunctionActiveMap = () => {
