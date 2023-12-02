@@ -40,12 +40,14 @@ export const saveFunctionActive = async (functionName: string, isFunctionActive:
 export const getGoogleOauthToken = () => {
     return new Promise<string>(resolve => {
         chrome.identity.getAuthToken({ interactive: true }, (token) => {
-            if (token) { // FIXME 토큰이 빈 값으로 올때가 있는데 재로그인 하는 방법을 찾아봐야함
+            if (token) {
                 resolve(token);
             }
         });
     });
 }
+
+export const refreshGoogleOauthToken = () => chrome.identity.clearAllCachedAuthTokens();
 
 export const getUserEmail = (): Promise<string> => {
     return new Promise<string>(resolve => {

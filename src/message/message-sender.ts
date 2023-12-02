@@ -9,3 +9,10 @@ export const getGoogleOauthToken = () => {
     });
 }
 
+export const refreshGoogleOauthToken = () => {
+    return new Promise<void>((resolve) => {
+        sendMessage({
+            action: MessageStatus.REFRESH_GOOGLE_OAUTH_TOKEN
+        }).then(resolve);
+    });
+}
