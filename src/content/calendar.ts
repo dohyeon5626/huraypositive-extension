@@ -1,6 +1,11 @@
 import { getTodayCompanySchedule } from "../api/google";
+import { getNowTimeNumber, getTimeNumber } from "../util/date";
+import { MeetingRoomBox } from "../views/meeting-room";
 
 (async () => {
-    const schedule = await getTodayCompanySchedule();
-    // TODO 스케줄에 따른 ui 관련 로직 작성할 예정
+    MeetingRoomBox.clearExistsBox();
+    const meetingRoomBox = new MeetingRoomBox();
+
+    meetingRoomBox.arrangeCalendarLeftNav();
+    meetingRoomBox.changeMeetingRoomStatus(await getTodayCompanySchedule());
 })();

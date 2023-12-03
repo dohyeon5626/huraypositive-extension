@@ -29,7 +29,7 @@
             font-size: 8px;
             line-height: 11px;
             color: #55585D;
-            
+
             display: flex;
             justify-content: center;
             align-items: center;
@@ -89,14 +89,14 @@
             top: 0px;
         }
 
-        #largeRoom {
+        #large-room {
             width: 29.47px;
             height: 72.48px;
             left: 131.33px;
             top: 0px;
         }
 
-        #freeRoom {
+        #free-room {
             width: 29.47px;
             height: 23.5px;
             left: 35.62px;

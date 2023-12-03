@@ -1,4 +1,6 @@
-import { BaseTag } from "./base";
+import { EventItem } from '../type/google-response';
+import { getNowTimeNumber, getTimeNumber } from '../util/date';
+import { BaseTag } from './base';
 
 export class MeetingRoomBox extends BaseTag {
     
@@ -23,8 +25,8 @@ export class MeetingRoomBox extends BaseTag {
                     <div id="middle2room" class="meeting-room">중2</div>
                     <div id="middle3room" class="meeting-room">중3</div>
 
-                    <div id="largeRoom" class="meeting-room">대</div>
-                    <div id="freeRoom" class="meeting-room">프</div>
+                    <div id="large-room" class="meeting-room">대</div>
+                    <div id="free-room" class="meeting-room">프</div>
 
                     <div id="a1" class="etc-room"></div>
                     <div id="b1" class="etc-room"></div>
@@ -64,6 +66,28 @@ export class MeetingRoomBox extends BaseTag {
 
     public arrangeCalendarLeftNav() {
         this.arrangeBehindPosition(document.querySelector(`div[jscontroller="vYumwc"]`)!!);
+    }
+
+    public changeMeetingRoomStatus(schedule: EventItem[]) {
+        const now = getNowTimeNumber();
+
+        const result = schedule.filter(schedule =>
+            schedule.location &&
+            schedule.location.startsWith("휴레이-7층-") &&
+            getTimeNumber(schedule.start.dateTime) <= now &&
+            now < getTimeNumber(schedule.end.dateTime)
+        ).map(schedule => schedule.location)
+        .map(location => location.replace("휴레이-7층-", ""))
+        .map(location => location.split(" ")[0])
+        .map(location => location.replace("소회의실", "small"))
+        .map(location => location.replace("중회의실", "middle"))
+        .map(location => location.replace("대회의실", "large-"))
+        .map(location => location.replace("프리토킹룸", "free-"))
+        .map(location => location + "room");
+
+        result.forEach(location => {
+            this.content.querySelector("#" + location)?.classList.add("active-room");
+        })
     }
 
 }
