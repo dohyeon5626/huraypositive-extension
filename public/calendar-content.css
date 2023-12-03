@@ -25,19 +25,26 @@
             position: absolute;
             border: 1px solid #FFFFFF;
             background-color: #EFF1F2;
-            font-weight: 700;
-            font-size: 8px;
-            line-height: 11px;
-            color: #55585D;
-
+            
             display: flex;
             justify-content: center;
             align-items: center;
+
+            .room-name {
+                opacity: 0;
+                font-weight: 700;
+                font-size: 8px;
+                line-height: 11px;
+                color: #55585D;
+            }
         }
 
         .active-room {
             background: #3F7CEA;
-            color: #FFFFFF;
+
+            .room-name {
+                color: #FFFFFF;
+            }
         }
 
         #small1room {

@@ -16,17 +16,17 @@ export class MeetingRoomBox extends BaseTag {
                 <h1 id="meeting-room-guide">휴레이 회의실</h1>
                 <div id="meeting-room-status-box">
 
-                    <div id="small1room" class="meeting-room">소1</div>
-                    <div id="small2room" class="meeting-room">소2</div>
-                    <div id="small3room" class="meeting-room">소3</div>
-                    <div id="small4room" class="meeting-room">소4</div>
+                    <div id="small1room" class="meeting-room"><p class="room-name">소1</p></div>
+                    <div id="small2room" class="meeting-room"><p class="room-name">소2</p></div>
+                    <div id="small3room" class="meeting-room"><p class="room-name">소3</p></div>
+                    <div id="small4room" class="meeting-room"><p class="room-name">소4</p></div>
 
-                    <div id="middle1room" class="meeting-room">중1</div>
-                    <div id="middle2room" class="meeting-room">중2</div>
-                    <div id="middle3room" class="meeting-room">중3</div>
+                    <div id="middle1room" class="meeting-room"><p class="room-name">중1</p></div>
+                    <div id="middle2room" class="meeting-room"><p class="room-name">중2</p></div>
+                    <div id="middle3room" class="meeting-room"><p class="room-name">중3</p></div>
 
-                    <div id="large-room" class="meeting-room">대</div>
-                    <div id="free-room" class="meeting-room">프</div>
+                    <div id="large-room" class="meeting-room"><p class="room-name">대</p></div>
+                    <div id="free-room" class="meeting-room"><p class="room-name">프</p></div>
 
                     <div id="a1" class="etc-room"></div>
                     <div id="b1" class="etc-room"></div>
@@ -87,6 +87,10 @@ export class MeetingRoomBox extends BaseTag {
 
         result.forEach(location => {
             this.content.querySelector("#" + location)?.classList.add("active-room");
+        })
+
+        this.content.querySelectorAll(".room-name").forEach(roomName => {
+            (roomName as HTMLElement).style.opacity = "100";
         })
     }
 
