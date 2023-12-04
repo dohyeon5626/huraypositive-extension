@@ -6,6 +6,13 @@ export const addTabUpdatedListener = (func: (url: string, tabId: number) => void
     });
 }
 
+export const insertCss = (tabId: number, file: string) => {
+    chrome.scripting.insertCSS({
+        target: { tabId: tabId },
+        files: [file]
+    });
+}
+
 export const executeScript = (tabId: number, file: string) => {
     chrome.scripting.executeScript({
         target: { tabId: tabId },
@@ -13,7 +20,12 @@ export const executeScript = (tabId: number, file: string) => {
     });
 }
 
-export const getFunctionActiveMap = (): Promise<Map<string, boolean>> => {
+export const applySheetAndScript = (tabId: number, css: string, js: string) => {
+    insertCss(tabId, css);
+    executeScript(tabId, js);
+}
+
+export const getFunctionActiveMap = () => {
     return new Promise<Map<string, boolean>>((resolve) => {
         chrome.storage.sync.get(['functionActiveMap'], (result) => {
             if (result.functionActiveMap) {
@@ -37,13 +49,17 @@ export const saveFunctionActive = async (functionName: string, isFunctionActive:
     saveFunctionActiveMap(functionActiveMap);
 }
 
-export const getGoogleOauthToken = (): Promise<string | undefined> => {
-    return new Promise<string | undefined>(resolve => {
+export const getGoogleOauthToken = () => {
+    return new Promise<string>(resolve => {
         chrome.identity.getAuthToken({ interactive: true }, (token) => {
-            resolve(token);
+            if (token) {
+                resolve(token);
+            }
         });
     });
 }
+
+export const refreshGoogleOauthToken = () => chrome.identity.clearAllCachedAuthTokens();
 
 export const getUserEmail = (): Promise<string> => {
     return new Promise<string>(resolve => {
@@ -52,5 +68,15 @@ export const getUserEmail = (): Promise<string> => {
             (user_info) => {
                 resolve(user_info.email);
             });
+    });
+}
+
+export const addMessageListener = (func: (request: any, callback: (response: any) => void) => void) => {
+    chrome.runtime.onMessage.addListener((request, sender, callback) => func(request, callback));
+}
+
+export const sendMessage = (action: any) => {
+    return new Promise<any>(resolve => {
+        chrome.runtime.sendMessage(action, value => resolve(value));
     });
 }
