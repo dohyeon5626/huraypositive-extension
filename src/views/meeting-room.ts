@@ -2,18 +2,8 @@ import { EventItem } from '../type/google-response';
 import { getNowTimeNumber, getTimeNumber } from '../util/date';
 import { BaseTag } from './base';
 
-export class MeetingRoomBox extends BaseTag {
-    
-    public static isExistCalendarLeftNav () {
-        return document.querySelectorAll(`.meeting-room-box`).length > 0
-    }
-
-    constructor() {
-        super(`
-            <div class="meeting-room-box">
-                <h1 class="meeting-room-guide">휴레이 회의실</h1>
+const statusBox = `
                 <div class="meeting-room-status-box">
-
                     <div class="small1room meeting-room"><p class="room-name">소1</p></div>
                     <div class="small2room meeting-room"><p class="room-name">소2</p></div>
                     <div class="small3room meeting-room"><p class="room-name">소3</p></div>
@@ -58,6 +48,30 @@ export class MeetingRoomBox extends BaseTag {
                     <div class="d3 etc-room"></div>
                     <div class="e3 etc-room"></div>
                 <div>
+                `;
+
+const getLocationClass = (location: string) => {
+    location = location.replace("휴레이-7층-", "");
+    location = location.split(" ")[0];
+    location = location.replace("소회의실", "small");
+    location = location.replace("중회의실", "middle");
+    location = location.replace("대회의실", "large-");
+    location = location.replace("프리토킹룸", "free-");
+    location = location + "room";
+    return location;
+}
+
+export class LeftNavMeetingRoomBox extends BaseTag {
+    
+    public static isExistCalendarLeftNav () {
+        return document.querySelectorAll(`.hEtGGf.HDIIVe.sBn5T > .left-nav-meeting-room-box`).length > 0
+    }
+
+    constructor() {
+        super(`
+            <div class="left-nav-meeting-room-box">
+                <h1 class="meeting-room-guide">휴레이 회의실</h1>
+                ${statusBox}
             </div>
         `);
     }
@@ -69,27 +83,46 @@ export class MeetingRoomBox extends BaseTag {
     public changeMeetingRoomStatus(schedule: EventItem[]) {
         const now = getNowTimeNumber();
 
-        const result = schedule.filter(schedule =>
+        schedule.filter(schedule =>
             schedule.location &&
             schedule.location.startsWith("휴레이-7층-") &&
             getTimeNumber(schedule.start.dateTime) <= now &&
             now < getTimeNumber(schedule.end.dateTime)
-        ).map(schedule => schedule.location)
-        .map(location => location.replace("휴레이-7층-", ""))
-        .map(location => location.split(" ")[0])
-        .map(location => location.replace("소회의실", "small"))
-        .map(location => location.replace("중회의실", "middle"))
-        .map(location => location.replace("대회의실", "large-"))
-        .map(location => location.replace("프리토킹룸", "free-"))
-        .map(location => location + "room");
-
-        result.forEach(location => {
+        ).map(schedule => getLocationClass(schedule.location))
+        .forEach(location => {
             this.content.querySelector("." + location)?.classList.add("active-room");
-        })
+        });
 
         this.content.querySelectorAll(".room-name").forEach(roomName => {
             (roomName as HTMLElement).style.opacity = "100";
-        })
+        });
     }
 
+}
+
+export class ScheduleMeetingRoomBox extends BaseTag {
+
+    constructor() {
+        super(`<div class="schedule-meeting-room-box">${statusBox}</div>`);
+    }
+
+    public static isExistCalendarInfoSchedule () {
+        return document.querySelectorAll(`.Mz3isd > .schedule-meeting-room-box`).length > 0
+    }
+
+    public static isReadyCalendarInfoSchedule () {
+        return document.querySelectorAll(`.Mz3isd > .nBzcnc.OcVpRe:not(.OjZ2cc.IyS93d.N1DhNb)`).length > 0
+    }
+
+    public arrangeCalendarInfoSchedule() {
+        const position = document.querySelector(`.Mz3isd > .nBzcnc.OcVpRe:not(.OjZ2cc.IyS93d.N1DhNb)`)!!;
+        this.arrangeBehindPosition(position as HTMLElement);
+
+        const location = position.querySelector(".p9T8o")!!.textContent!!;
+        this.content.querySelector("." + getLocationClass(location))?.classList.add("active-room");
+
+        this.content.querySelectorAll(".room-name").forEach(roomName => {
+            (roomName as HTMLElement).style.opacity = "100";
+        });
+    }
 }
