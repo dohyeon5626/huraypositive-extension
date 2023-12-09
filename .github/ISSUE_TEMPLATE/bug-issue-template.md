@@ -1,7 +1,7 @@
 ---
 name: Bug issue template
 about: 오류 발생
-title: 'bug: <-- 오류 설명 -->'
+title: 'Bug: <-- 오류 설명 -->'
 labels: bug
 assignees: ''
 
