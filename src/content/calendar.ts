@@ -1,9 +1,8 @@
 import { getTodayCompanySchedule } from "../api/google";
-import { getNowTimeNumber, getTimeNumber } from "../util/date";
 import { MeetingRoomBox } from "../views/meeting-room";
 
 (async () => {
-    if (!MeetingRoomBox.isExist()) {
+    if (!MeetingRoomBox.isExistCalendarLeftNav()) {
         const meetingRoomBox = new MeetingRoomBox();
 
         meetingRoomBox.arrangeCalendarLeftNav();

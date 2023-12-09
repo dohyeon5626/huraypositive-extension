@@ -4,10 +4,10 @@
     font-family: "Noto Sans", sans-serif;
 }
 
-#meeting-room-box {
+.meeting-room-box {
     padding: 16px 22px 16px 28px;
 
-    #meeting-room-guide {
+    .meeting-room-guide {
         color: #3C4043;
         font-size: 14px;
         font-weight: 500;
@@ -16,7 +16,7 @@
         margin-bottom: 14px;
     }
 
-    #meeting-room-status-box {
+    .meeting-room-status-box {
         position: relative;
         width: 198px;
         height: 215.77px;
@@ -47,63 +47,63 @@
             }
         }
 
-        #small1room {
+        .small1room {
             width: 34.34px;
             height: 23.97px;
             left: 0px;
             top: 48.51px;
         }
 
-        #small2room {
+        .small2room {
             width: 34.34px;
             height: 23.97px;
             left: 0px;
             top: 24.26px;
         }
 
-        #small3room {
+        .small3room {
             width: 34.34px;
             height: 23.97px;
             left: 0px;
             top: 0px;   
         }
 
-        #small4room {
+        .small4room {
             width: 29.47px;
             height: 36.1px;
             left: 168.53px;
             top: 179.9px;   
         }
 
-        #middle1room {
+        .middle1room {
             width: 29.47px;
             height: 48.22px;
             left: 35.62px;
             top: 0px;
         }
 
-        #middle2room {
+        .middle2room {
             width: 29.47px;
             height: 36.1px;
             left: 161.09px;
             top: 36.38px;
         }
 
-        #middle3room {
+        .middle3room {
             width: 29.47px;
             height: 36.1px;
             left: 161.09px;
             top: 0px;
         }
 
-        #large-room {
+        .large-room {
             width: 29.47px;
             height: 72.48px;
             left: 131.33px;
             top: 0px;
         }
 
-        #free-room {
+        .free-room {
             width: 29.47px;
             height: 23.5px;
             left: 35.62px;
@@ -117,203 +117,203 @@
             border: 1px solid #FFFFFF;
         }
 
-        #a1 {
+        .a1 {
             width: 14.59px;
             height: 17.9px;
             left: 27.18px;
             top: 87.5px;
         }
 
-        #b1 {
+        .b1 {
             width: 22.03px;
             height: 11.84px;
             left: 19.74px;
             top: 105.69px;
         }
 
-        #c1 {
+        .c1 {
             width: 22.03px;
             height: 11.84px;
             left: 19.74px;
             top: 117.82px;
         }
 
-        #d1 {
+        .d1 {
             width: 22.03px;
             height: 6.06px;
             left: 19.74px;
             top: 129.95px;
         }
 
-        #e1 {
+        .e1 {
             width: 22.03px;
             height: 11.84px;
             left: 19.74px;
             top: 136.3px;
         }
 
-        #f1 {
+        .f1 {
             width: 22.03px;
             height: 11.84px;
             left: 19.74px;
             top: 148.43px;
         }
 
-        #g1 {
+        .g1 {
             width: 22.03px;
             height: 54.58px;
             left: 42.06px;
             top: 87.5px;
         }
 
-        #h1 {
+        .h1 {
             width: 22.03px;
             height: 17.9px;
             left: 42.06px;
             top: 142.36px;
         }
 
-        #i1 {
+        .i1 {
             width: 22.03px;
             height: 17.9px;
             left: 64.38px;
             top: 87.5px;
         }
 
-        #j1 {
+        .j1 {
             width: 22.03px;
             height: 17.9px;
             left: 64.38px;
             top: 105.69px;
         }
 
-        #k1 {
+        .k1 {
             width: 22.03px;
             height: 18.19px;
             left: 64.38px;
             top: 123.88px;
         }
 
-        #l1 {
+        .l1 {
             width: 29.47px;
             height: 17.9px;
             left: 64.38px;
             top: 142.36px;
         }
 
-        #a2 {
+        .a2 {
             width: 22.03px;
             height: 17.9px;
             left: 131.33px;
             top: 87.5px;
         }
 
-        #b2 {
+        .b2 {
             width: 22.03px;
             height: 17.9px;
             left: 131.33px;
             top: 105.69px;
         }
 
-        #c2 {
+        .c2 {
             width: 22.03px;
             height: 18.19px;
             left: 131.33px;
             top: 123.88px;
         }
 
-        #d2 {
+        .d2 {
             width: 22.03px;
             height: 17.9px;
             left: 131.33px;
             top: 142.36px;
         }
 
-        #e2 {
+        .e2 {
             width: 22.03px;
             height: 23.97px;
             left: 153.65px;
             top: 87.5px;
         }
 
-        #f2 {
+        .f2 {
             width: 22.03px;
             height: 48.51px;
             left: 153.65px;
             top: 111.75px;
         }
 
-        #g2 {
+        .g2 {
             width: 14.59px;
             height: 17.9px;
             left: 175.97px;
             top: 87.5px;
         }
 
-        #h2 {
+        .h2 {
             width: 22.03px;
             height: 11.84px;
             left: 175.97px;
             top: 105.69px;
         }
 
-        #i2 {
+        .i2 {
             width: 22.03px;
             height: 11.84px;
             left: 175.97px;
             top: 117.82px;
         }
 
-        #j2 {
+        .j2 {
             width: 22.03px;
             height: 6.06px;
             left: 175.97px;
             top: 129.95px;
         }
 
-        #k2 {
+        .k2 {
             width: 22.03px;
             height: 11.84px;
             left: 175.97px;
             top: 136.3px;
         }
 
-        #l2 {
+        .l2 {
             width: 22.03px;
             height: 11.84px;
             left: 175.97px;
             top: 148.43px;
         }
 
-        #a3 {
+        .a3 {
             width: 34.34px;
             height: 23.97px;
             left: 0px;
             top: 179.9px;
         }
 
-        #b3 {
+        .b3 {
             width: 34.34px;
             height: 11.84px;
             left: 0px;
             top: 204.16px;
         }
 
-        #c3 {
+        .c3 {
             width: 44.35px;
             height: 36.1px;
             left: 34.62px;
             top: 179.9px;
         }
 
-        #d3 {
+        .d3 {
             width: 51.79px;
             height: 36.1px;
             left: 79.26px;
             top: 179.9px;
         }
 
-        #e3 {
+        .e3 {
             width: 36.91px;
             height: 36.1px;
             left: 131.33px;

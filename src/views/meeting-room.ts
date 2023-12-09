@@ -4,59 +4,59 @@ import { BaseTag } from './base';
 
 export class MeetingRoomBox extends BaseTag {
     
-    public static isExist () {
-        return document.querySelectorAll(`#meeting-room-box`).length > 0
+    public static isExistCalendarLeftNav () {
+        return document.querySelectorAll(`.meeting-room-box`).length > 0
     }
 
     constructor() {
         super(`
-            <div id="meeting-room-box">
-                <h1 id="meeting-room-guide">휴레이 회의실</h1>
-                <div id="meeting-room-status-box">
+            <div class="meeting-room-box">
+                <h1 class="meeting-room-guide">휴레이 회의실</h1>
+                <div class="meeting-room-status-box">
 
-                    <div id="small1room" class="meeting-room"><p class="room-name">소1</p></div>
-                    <div id="small2room" class="meeting-room"><p class="room-name">소2</p></div>
-                    <div id="small3room" class="meeting-room"><p class="room-name">소3</p></div>
-                    <div id="small4room" class="meeting-room"><p class="room-name">소4</p></div>
+                    <div class="small1room meeting-room"><p class="room-name">소1</p></div>
+                    <div class="small2room meeting-room"><p class="room-name">소2</p></div>
+                    <div class="small3room meeting-room"><p class="room-name">소3</p></div>
+                    <div class="small4room meeting-room"><p class="room-name">소4</p></div>
 
-                    <div id="middle1room" class="meeting-room"><p class="room-name">중1</p></div>
-                    <div id="middle2room" class="meeting-room"><p class="room-name">중2</p></div>
-                    <div id="middle3room" class="meeting-room"><p class="room-name">중3</p></div>
+                    <div class="middle1room meeting-room"><p class="room-name">중1</p></div>
+                    <div class="middle2room meeting-room"><p class="room-name">중2</p></div>
+                    <div class="middle3room meeting-room"><p class="room-name">중3</p></div>
 
-                    <div id="large-room" class="meeting-room"><p class="room-name">대</p></div>
-                    <div id="free-room" class="meeting-room"><p class="room-name">프</p></div>
+                    <div class="large-room meeting-room"><p class="room-name">대</p></div>
+                    <div class="free-room meeting-room"><p class="room-name">프</p></div>
 
-                    <div id="a1" class="etc-room"></div>
-                    <div id="b1" class="etc-room"></div>
-                    <div id="c1" class="etc-room"></div>
-                    <div id="d1" class="etc-room"></div>
-                    <div id="e1" class="etc-room"></div>
-                    <div id="f1" class="etc-room"></div>
-                    <div id="g1" class="etc-room"></div>
-                    <div id="h1" class="etc-room"></div>
-                    <div id="i1" class="etc-room"></div>
-                    <div id="j1" class="etc-room"></div>
-                    <div id="k1" class="etc-room"></div>
-                    <div id="l1" class="etc-room"></div>
+                    <div class="a1 etc-room"></div>
+                    <div class="b1 etc-room"></div>
+                    <div class="c1 etc-room"></div>
+                    <div class="d1 etc-room"></div>
+                    <div class="e1 etc-room"></div>
+                    <div class="f1 etc-room"></div>
+                    <div class="g1 etc-room"></div>
+                    <div class="h1 etc-room"></div>
+                    <div class="i1 etc-room"></div>
+                    <div class="j1 etc-room"></div>
+                    <div class="k1 etc-room"></div>
+                    <div class="l1 etc-room"></div>
 
-                    <div id="a2" class="etc-room"></div>
-                    <div id="b2" class="etc-room"></div>
-                    <div id="c2" class="etc-room"></div>
-                    <div id="d2" class="etc-room"></div>
-                    <div id="e2" class="etc-room"></div>
-                    <div id="f2" class="etc-room"></div>
-                    <div id="g2" class="etc-room"></div>
-                    <div id="h2" class="etc-room"></div>
-                    <div id="i2" class="etc-room"></div>
-                    <div id="j2" class="etc-room"></div>
-                    <div id="k2" class="etc-room"></div>
-                    <div id="l2" class="etc-room"></div>
+                    <div class="a2 etc-room"></div>
+                    <div class="b2 etc-room"></div>
+                    <div class="c2 etc-room"></div>
+                    <div class="d2 etc-room"></div>
+                    <div class="e2 etc-room"></div>
+                    <div class="f2 etc-room"></div>
+                    <div class="g2 etc-room"></div>
+                    <div class="h2 etc-room"></div>
+                    <div class="i2 etc-room"></div>
+                    <div class="j2 etc-room"></div>
+                    <div class="k2 etc-room"></div>
+                    <div class="l2 etc-room"></div>
 
-                    <div id="a3" class="etc-room"></div>
-                    <div id="b3" class="etc-room"></div>
-                    <div id="c3" class="etc-room"></div>
-                    <div id="d3" class="etc-room"></div>
-                    <div id="e3" class="etc-room"></div>
+                    <div class="a3 etc-room"></div>
+                    <div class="b3 etc-room"></div>
+                    <div class="c3 etc-room"></div>
+                    <div class="d3 etc-room"></div>
+                    <div class="e3 etc-room"></div>
                 <div>
             </div>
         `);
@@ -84,7 +84,7 @@ export class MeetingRoomBox extends BaseTag {
         .map(location => location + "room");
 
         result.forEach(location => {
-            this.content.querySelector("#" + location)?.classList.add("active-room");
+            this.content.querySelector("." + location)?.classList.add("active-room");
         })
 
         this.content.querySelectorAll(".room-name").forEach(roomName => {
