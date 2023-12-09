@@ -3,9 +3,10 @@ import { getNowTimeNumber, getTimeNumber } from "../util/date";
 import { MeetingRoomBox } from "../views/meeting-room";
 
 (async () => {
-    MeetingRoomBox.clearExistsBox();
-    const meetingRoomBox = new MeetingRoomBox();
+    if (!MeetingRoomBox.isExist()) {
+        const meetingRoomBox = new MeetingRoomBox();
 
-    meetingRoomBox.arrangeCalendarLeftNav();
-    meetingRoomBox.changeMeetingRoomStatus(await getTodayCompanySchedule());
+        meetingRoomBox.arrangeCalendarLeftNav();
+        meetingRoomBox.changeMeetingRoomStatus(await getTodayCompanySchedule());
+    }
 })();

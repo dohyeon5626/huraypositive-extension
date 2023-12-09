@@ -4,10 +4,8 @@ import { BaseTag } from './base';
 
 export class MeetingRoomBox extends BaseTag {
     
-    public static clearExistsBox () {
-        document.querySelectorAll(`#meeting-room-box`).forEach(box => {
-            box.remove();
-        });
+    public static isExist () {
+        return document.querySelectorAll(`#meeting-room-box`).length > 0
     }
 
     constructor() {
