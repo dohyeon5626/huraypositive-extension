@@ -1,11 +1,24 @@
 import { getTodayCompanySchedule } from "../api/google";
-import { getNowTimeNumber, getTimeNumber } from "../util/date";
-import { MeetingRoomBox } from "../views/meeting-room";
+import { LeftNavMeetingRoomBox, ScheduleMeetingRoomBox } from "../views/meeting-room";
 
 (async () => {
-    MeetingRoomBox.clearExistsBox();
-    const meetingRoomBox = new MeetingRoomBox();
+    if (!LeftNavMeetingRoomBox.isExistCalendarLeftNav()) {
+        const meetingRoomBox = new LeftNavMeetingRoomBox();
 
-    meetingRoomBox.arrangeCalendarLeftNav();
-    meetingRoomBox.changeMeetingRoomStatus(await getTodayCompanySchedule());
+        meetingRoomBox.arrangeCalendarLeftNav();
+        meetingRoomBox.changeMeetingRoomStatus(await getTodayCompanySchedule());
+    }
+})();
+
+(async () => {
+    new MutationObserver((mutations) => {
+        if (!ScheduleMeetingRoomBox.isExistCalendarInfoSchedule() && ScheduleMeetingRoomBox.isReadyCalendarInfoSchedule()) {
+            new ScheduleMeetingRoomBox().arrangeCalendarInfoSchedule();
+        }
+    }).observe(document.querySelector('.yDmH0d')!!, {
+        childList: true,
+        attributes: false,
+        characterData: true,
+        subtree: true
+    });
 })();
