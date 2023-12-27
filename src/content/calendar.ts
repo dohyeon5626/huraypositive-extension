@@ -1,7 +1,9 @@
-import { getTodayCompanySchedule } from "../api/google";
-import { LeftNavMeetingRoomBox, ScheduleMeetingRoomBox } from "../views/meeting-room";
+import { getTodayCompanySchedule, addMissingMeetingRoomCalendar } from '../api/google';
+import { LeftNavMeetingRoomBox, ScheduleMeetingRoomBox } from '../views/meeting-room';
 
 (async () => {
+    addMissingMeetingRoomCalendar(() => location.reload());
+
     if (!LeftNavMeetingRoomBox.isExistCalendarLeftNav()) {
         const meetingRoomBox = new LeftNavMeetingRoomBox();
 
