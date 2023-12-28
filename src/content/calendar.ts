@@ -9,6 +9,7 @@ import { LeftNavMeetingRoomBox, ScheduleMeetingRoomBox } from '../views/meeting-
 
         meetingRoomBox.arrangeCalendarLeftNav();
         meetingRoomBox.changeMeetingRoomStatus(await getTodayCompanySchedule());
+        meetingRoomBox.addCalendarButtonEvent();
     }
 })();
 

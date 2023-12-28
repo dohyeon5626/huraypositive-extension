@@ -47,7 +47,7 @@ export const getTodayCompanySchedule = () => {
 }
 
 export const addMissingMeetingRoomCalendar = (addedFunc: () => void) => {
-    return new Promise<string[]>(async (resolve) => {
+    return new Promise<void>(async (resolve) => {
         const calendarIdList = (await (await googleAxios()).get<Calendar>(`/calendar/v3/users/me/calendarList`))
             .data.items.filter(item => item.summary.startsWith("휴레이-7층-")).map(item => item.id);
 
@@ -72,5 +72,6 @@ export const addMissingMeetingRoomCalendar = (addedFunc: () => void) => {
             });
 
         if (notAddedCalendarIdList.length > 0) addedFunc();
+        resolve();
     });
 }

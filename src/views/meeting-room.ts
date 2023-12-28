@@ -50,6 +50,10 @@ const statusBox = `
                 <div>
                 `;
 
+const isLocationString = (location: string | null) => {
+    return location && location.startsWith("휴레이-7층-");
+}
+
 const getLocationClass = (location: string) => {
     location = location.replace("휴레이-7층-", "");
     location = location.split(" ")[0];
@@ -84,8 +88,7 @@ export class LeftNavMeetingRoomBox extends BaseTag {
         const now = getNowTimeNumber();
 
         schedule.filter(schedule =>
-            schedule.location &&
-            schedule.location.startsWith("휴레이-7층-") &&
+            isLocationString(schedule.location) &&
             getTimeNumber(schedule.start.dateTime) <= now &&
             now < getTimeNumber(schedule.end.dateTime)
         ).map(schedule => getLocationClass(schedule.location))
@@ -95,6 +98,20 @@ export class LeftNavMeetingRoomBox extends BaseTag {
 
         this.content.querySelectorAll(".room-name").forEach(roomName => {
             (roomName as HTMLElement).style.opacity = "100";
+        });
+    }
+
+    public addCalendarButtonEvent() {
+        document.querySelectorAll("#tkQpTb .XXcuqd").forEach(buttonBox => {
+            const location = buttonBox.querySelector("span")!!.textContent!!;
+            if (isLocationString(location)) {
+                const inputBox = buttonBox.querySelector("input")!!;
+                const meetingRoomBox = this.content.querySelector(`.${getLocationClass(location)}`)!!;
+
+                meetingRoomBox.addEventListener('click', (event) => inputBox.click());
+                meetingRoomBox.addEventListener('mouseover', (event) => (buttonBox as HTMLElement).style.backgroundColor = '#CEDFF9');
+                meetingRoomBox.addEventListener('mouseout', (event) => (buttonBox as HTMLElement).style.backgroundColor = '#FFFFFF');
+            }
         });
     }
 
@@ -116,13 +133,14 @@ export class ScheduleMeetingRoomBox extends BaseTag {
 
     public arrangeCalendarInfoSchedule() {
         const position = document.querySelector(`.Mz3isd > .nBzcnc.OcVpRe:not(.OjZ2cc.IyS93d.N1DhNb)`)!!;
-        this.arrangeBehindPosition(position as HTMLElement);
 
         const location = position.querySelector(".p9T8o")!!.textContent!!;
-        this.content.querySelector("." + getLocationClass(location))?.classList.add("active-room");
-
-        this.content.querySelectorAll(".room-name").forEach(roomName => {
-            (roomName as HTMLElement).style.opacity = "100";
-        });
+        if (isLocationString(location)) {
+            this.content.querySelector("." + getLocationClass(location))?.classList.add("active-room");
+            this.content.querySelectorAll(".room-name").forEach(roomName => {
+                (roomName as HTMLElement).style.opacity = "100";
+            });
+            this.arrangeBehindPosition(position as HTMLElement);
+        }
     }
 }
