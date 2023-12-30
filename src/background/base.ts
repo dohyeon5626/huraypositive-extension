@@ -1,14 +1,10 @@
-import { saveFunctionActiveMap, getUserEmail } from "../api/chrome";
-import { FUNCTION } from "../code";
+import { refreshFunctionActiveMap, getUserEmail } from "../api/chrome";
+import { BASE_FUNC_ACTIVE_MAP } from "../func-base";
 
-const defaultFunctionActiveMap = new Map([
-    [FUNCTION.MEETING_ROOM, true],
-    [FUNCTION.SPREADSHEET_SEARCH, true]
-]);
+refreshFunctionActiveMap(BASE_FUNC_ACTIVE_MAP);
 
 chrome.runtime.onInstalled.addListener(({ reason }) => {
     if (reason === 'install') {
-        saveFunctionActiveMap(defaultFunctionActiveMap);
         getUserEmail().then(email => {
             if (!email.includes("huray.net")) {
                 chrome.tabs.create({ url: 'validation.html' });
