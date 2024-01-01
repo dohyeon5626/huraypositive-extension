@@ -1,4 +1,4 @@
-import { addTabUpdatedListener, applySheetAndScript, getFunctionActiveMap } from "../api/chrome";
+import { addTabUpdatedListener, applySheetAndScript, executeScript, getFunctionActiveMap } from "../api/chrome";
 import { FUNCTION } from "../func-base";
 
 addTabUpdatedListener(
@@ -9,6 +9,9 @@ addTabUpdatedListener(
         }
         else if (functionActiveMap.get(FUNCTION.SPREADSHEET_SEARCH) && url.startsWith("https://docs.google.com/spreadsheets")) {
             // TODO 스프레드시트 시트 검색바 추가 로직
+        }
+        else if (functionActiveMap.get(FUNCTION.SWAGGER_JSON) && url.includes("huray") && url.includes("swagger")) {
+            executeScript(tabId, "swagger-content.js");
         }
     }
 );

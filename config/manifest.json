@@ -4,7 +4,7 @@
     "version": "1.0.0",
     "manifest_version": 3,
     "permissions": ["scripting", "identity", "storage",  "identity.email"],
-    "host_permissions" : ["https://*.google.com/*"],
+    "host_permissions" : ["https://*.google.com/*", "https://*.huraydev.net/*", "https://*.huraystg.net/*", "https://*.huray.net/*"],
 
     "action": {
         "default_popup": "popup.html"
