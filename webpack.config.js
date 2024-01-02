@@ -8,6 +8,7 @@ module.exports = {
    entry: {
       "background": ["./src/background/base.ts", "./src/background/router.ts", "./src/message/message_receiver.ts"],
       "calendar-content": ["./src/content/calendar.ts"],
+      "spread-search": ["./src/content/spread.ts"],
       "popup": ["./src/popup/popup.ts"]
    },
    output: {
