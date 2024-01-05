@@ -9,6 +9,7 @@ module.exports = {
       "background": ["./src/background/base.ts", "./src/background/router.ts", "./src/message/message_receiver.ts"],
       "calendar-content": ["./src/content/calendar.ts"],
       "swagger-content": ["./src/content/swagger.ts"],
+      "spread-search-content": ["./src/content/spread.ts"],
       "popup": ["./src/popup/popup.ts"]
    },
    output: {

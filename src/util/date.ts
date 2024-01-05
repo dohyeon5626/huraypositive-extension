@@ -2,10 +2,10 @@ export const getTodayDateString = () => {
     return new Date((new Date()).getTime() + (1000 * 60 * 60 * 9)).toISOString().split('T')[0];
 }
 
-export const getTimeNumber = (dateTime: string) => {
+export const getTime = (dateTime: string) => {
     return new Date(dateTime).getTime();
 }
 
-export const getNowTimeNumber = () => {
+export const getNowTime = () => {
     return new Date().getTime();
 }

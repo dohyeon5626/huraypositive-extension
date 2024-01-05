@@ -3,6 +3,12 @@
     "description": "휴레이포지티브를 위한 확장프로그램",
     "version": "1.0.0",
     "manifest_version": 3,
+    "icons": {
+        "16": "img/logo-16.png",
+        "32": "img/logo-32.png",
+        "48": "img/logo-48.png",
+        "128": "img/logo-128.png"
+    },
     "permissions": ["scripting", "identity", "storage",  "identity.email"],
     "host_permissions" : ["https://*.google.com/*", "https://*.huraydev.net/*", "https://*.huraystg.net/*", "https://*.huray.net/*"],
 
@@ -17,7 +23,7 @@
     "oauth2": {
         "scopes":[
             "https://www.googleapis.com/auth/userinfo.email",
-            "https://www.googleapis.com/auth/calendar.readonly"
+            "https://www.googleapis.com/auth/calendar"
         ]
     }
 }

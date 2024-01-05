@@ -1,5 +1,5 @@
 import { EventItem } from '../type/google-response';
-import { getNowTimeNumber, getTimeNumber } from '../util/date';
+import { getNowTime, getTime } from '../util/date';
 import { BaseTag } from './base';
 
 const statusBox = `
@@ -50,6 +50,10 @@ const statusBox = `
                 <div>
                 `;
 
+const isLocationString = (location: string | null) => {
+    return location && location.startsWith("휴레이-7층-");
+}
+
 const getLocationClass = (location: string) => {
     location = location.replace("휴레이-7층-", "");
     location = location.split(" ")[0];
@@ -81,20 +85,31 @@ export class LeftNavMeetingRoomBox extends BaseTag {
     }
 
     public changeMeetingRoomStatus(schedule: EventItem[]) {
-        const now = getNowTimeNumber();
+        const now = getNowTime();
 
         schedule.filter(schedule =>
-            schedule.location &&
-            schedule.location.startsWith("휴레이-7층-") &&
-            getTimeNumber(schedule.start.dateTime) <= now &&
-            now < getTimeNumber(schedule.end.dateTime)
+            isLocationString(schedule.location) &&
+            getTime(schedule.start.dateTime) <= now &&
+            now < getTime(schedule.end.dateTime)
         ).map(schedule => getLocationClass(schedule.location))
         .forEach(location => {
             this.content.querySelector("." + location)?.classList.add("active-room");
         });
 
-        this.content.querySelectorAll(".room-name").forEach(roomName => {
-            (roomName as HTMLElement).style.opacity = "100";
+        this.content.querySelectorAll(".room-name").forEach(roomName => roomName.classList.add("show-name"));
+    }
+
+    public addCalendarButtonEvent() {
+        document.querySelectorAll("#tkQpTb .XXcuqd").forEach(buttonBox => {
+            const location = buttonBox.querySelector("span")!!.textContent!!;
+            if (isLocationString(location)) {
+                const inputBox = buttonBox.querySelector("input")!!;
+                const meetingRoomBox = this.content.querySelector(`.${getLocationClass(location)}`)!!;
+
+                meetingRoomBox.addEventListener('click', (event) => inputBox.click());
+                meetingRoomBox.addEventListener('mouseover', (event) => buttonBox.classList.add("meeting-room-input"));
+                meetingRoomBox.addEventListener('mouseout', (event) => buttonBox.classList.remove("meeting-room-input"));
+            }
         });
     }
 
@@ -116,13 +131,12 @@ export class ScheduleMeetingRoomBox extends BaseTag {
 
     public arrangeCalendarInfoSchedule() {
         const position = document.querySelector(`.Mz3isd > .nBzcnc.OcVpRe:not(.OjZ2cc.IyS93d.N1DhNb)`)!!;
-        this.arrangeBehindPosition(position as HTMLElement);
 
         const location = position.querySelector(".p9T8o")!!.textContent!!;
-        this.content.querySelector("." + getLocationClass(location))?.classList.add("active-room");
-
-        this.content.querySelectorAll(".room-name").forEach(roomName => {
-            (roomName as HTMLElement).style.opacity = "100";
-        });
+        if (isLocationString(location)) {
+            this.content.querySelector("." + getLocationClass(location))?.classList.add("active-room");
+            this.content.querySelectorAll(".room-name").forEach(roomName => roomName.classList.add("show-name"));
+            this.arrangeBehindPosition(position as HTMLElement);
+        }
     }
 }
