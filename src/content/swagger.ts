@@ -1,8 +1,9 @@
 const setBlockAttribute = (blockList: NodeListOf<Element>) => {
     blockList.forEach(block => {
-        (block as HTMLElement).style.resize = "vertical";
         (block as HTMLElement).style.height = (block as HTMLElement).getBoundingClientRect().height + "px";
-        (block as HTMLElement).style.maxHeight = "none";
+        if (!block.classList.contains("block")) {
+            block.classList.add("block");
+        }
     });
 }
 

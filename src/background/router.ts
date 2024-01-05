@@ -11,7 +11,7 @@ addTabUpdatedListener(
             // TODO 스프레드시트 시트 검색바 추가 로직
         }
         else if (functionActiveMap.get(FUNCTION.SWAGGER_JSON) && url.includes("huray") && url.includes("swagger")) {
-            executeScript(tabId, "swagger-content.js");
+            applySheetAndScript(tabId, "swagger-content.css", "swagger-content.js");
         }
     }
 );

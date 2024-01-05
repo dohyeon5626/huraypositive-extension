@@ -8,7 +8,8 @@ getUserEmail().then(email => {
     if (email.includes("huray.net")) {
         getFunctionActiveMap().then(functionActiveMap => {
             Array.from(functionActiveMap)
-                .sort((func1, func2) => (BASE_FUNC_INDEX_MAP.get(func1[0] as FUNCTION)!! < BASE_FUNC_INDEX_MAP.get(func2[0] as FUNCTION)!!) ? -1 : 1)
+                .sort((func1, func2) => 
+                    (BASE_FUNC_INDEX_MAP.get(func1[0] as FUNCTION)!! < BASE_FUNC_INDEX_MAP.get(func2[0] as FUNCTION)!!) ? -1 : 1)
                 .forEach(([functionName, functionActive]) => {
                     box.addTag(new Function(functionName, functionActive));
                 });

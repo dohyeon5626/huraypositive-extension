@@ -7,7 +7,7 @@ export enum FUNCTION {
 export const BASE_FUNC_ACTIVE_MAP = new Map([
     [FUNCTION.MEETING_ROOM, true],
     [FUNCTION.SPREADSHEET_SEARCH, true],
-    [FUNCTION.SWAGGER_JSON, false],
+    [FUNCTION.SWAGGER_JSON, true],
 ]);
 
 export const BASE_FUNC_INDEX_MAP = new Map([
