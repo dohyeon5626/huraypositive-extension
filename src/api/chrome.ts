@@ -43,6 +43,24 @@ export const saveFunctionActiveMap = (functionActiveMap: Map<string, boolean>) =
     });
 }
 
+export const refreshFunctionActiveMap = async (newFunctionActiveMap: Map<string, boolean>) => {
+    const functionActiveMap = await getFunctionActiveMap();
+    
+    functionActiveMap.forEach((funcActive, funcName) => {
+        if (!newFunctionActiveMap.has(funcName)) {
+            functionActiveMap.delete(funcName);
+        }
+    });
+
+    newFunctionActiveMap.forEach((funcActive, funcName) => {
+        if (!functionActiveMap.has(funcName)) {
+            functionActiveMap.set(funcName, funcActive);
+        }
+    });
+
+    saveFunctionActiveMap(functionActiveMap);
+}
+
 export const saveFunctionActive = async (functionName: string, isFunctionActive: boolean) => {
     const functionActiveMap = await getFunctionActiveMap();
     functionActiveMap.set(functionName, isFunctionActive);

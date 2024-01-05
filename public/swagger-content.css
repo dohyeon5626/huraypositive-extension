@@ -1,0 +1,4 @@
+.block {
+    resize: vertical;
+    max-height: none!important;
+}

@@ -10,7 +10,7 @@ export abstract class BaseTag {
         document.body.append(this.content);
     }
 
-    protected arrangeBehindPosition(element: HTMLElement) {
+    public arrangeBehindPosition(element: HTMLElement) {
         element.insertAdjacentElement("afterend", this.content);
     }
 
