@@ -96,9 +96,7 @@ export class LeftNavMeetingRoomBox extends BaseTag {
             this.content.querySelector("." + location)?.classList.add("active-room");
         });
 
-        this.content.querySelectorAll(".room-name").forEach(roomName => {
-            (roomName as HTMLElement).style.opacity = "100";
-        });
+        this.content.querySelectorAll(".room-name").forEach(roomName => roomName.classList.add("show-name"));
     }
 
     public addCalendarButtonEvent() {
@@ -109,8 +107,8 @@ export class LeftNavMeetingRoomBox extends BaseTag {
                 const meetingRoomBox = this.content.querySelector(`.${getLocationClass(location)}`)!!;
 
                 meetingRoomBox.addEventListener('click', (event) => inputBox.click());
-                meetingRoomBox.addEventListener('mouseover', (event) => (buttonBox as HTMLElement).style.backgroundColor = '#CEDFF9');
-                meetingRoomBox.addEventListener('mouseout', (event) => (buttonBox as HTMLElement).style.backgroundColor = '#FFFFFF');
+                meetingRoomBox.addEventListener('mouseover', (event) => buttonBox.classList.add("meeting-room-input"));
+                meetingRoomBox.addEventListener('mouseout', (event) => buttonBox.classList.remove("meeting-room-input"));
             }
         });
     }
@@ -137,9 +135,7 @@ export class ScheduleMeetingRoomBox extends BaseTag {
         const location = position.querySelector(".p9T8o")!!.textContent!!;
         if (isLocationString(location)) {
             this.content.querySelector("." + getLocationClass(location))?.classList.add("active-room");
-            this.content.querySelectorAll(".room-name").forEach(roomName => {
-                (roomName as HTMLElement).style.opacity = "100";
-            });
+            this.content.querySelectorAll(".room-name").forEach(roomName => roomName.classList.add("show-name"));
             this.arrangeBehindPosition(position as HTMLElement);
         }
     }

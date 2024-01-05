@@ -47,6 +47,10 @@
             line-height: 11px;
             color: #55585D;
         }
+
+        .show-name {
+            opacity: 100!important;
+        }
     }
 
     .meeting-room:hover:not(.active-room:hover) {
@@ -338,4 +342,8 @@
         top: 179.9px;
     }
 
+}
+
+.meeting-room-input {
+    background-color: #CEDFF9;
 }
