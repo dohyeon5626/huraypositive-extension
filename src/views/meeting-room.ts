@@ -1,5 +1,5 @@
 import { EventItem } from '../type/google-response';
-import { getNowTimeNumber, getTimeNumber } from '../util/date';
+import { getNowTime, getTime } from '../util/date';
 import { BaseTag } from './base';
 
 const statusBox = `
@@ -85,12 +85,12 @@ export class LeftNavMeetingRoomBox extends BaseTag {
     }
 
     public changeMeetingRoomStatus(schedule: EventItem[]) {
-        const now = getNowTimeNumber();
+        const now = getNowTime();
 
         schedule.filter(schedule =>
             isLocationString(schedule.location) &&
-            getTimeNumber(schedule.start.dateTime) <= now &&
-            now < getTimeNumber(schedule.end.dateTime)
+            getTime(schedule.start.dateTime) <= now &&
+            now < getTime(schedule.end.dateTime)
         ).map(schedule => getLocationClass(schedule.location))
         .forEach(location => {
             this.content.querySelector("." + location)?.classList.add("active-room");
