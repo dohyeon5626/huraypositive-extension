@@ -34,6 +34,7 @@
         position: absolute;
         border: 1px solid #FFFFFF;
         background-color: #EFF1F2;
+        cursor: pointer;
         
         display: flex;
         justify-content: center;
@@ -46,10 +47,22 @@
             line-height: 11px;
             color: #55585D;
         }
+
+        .show-name {
+            opacity: 100!important;
+        }
+    }
+
+    .meeting-room:hover:not(.active-room:hover) {
+        background-color: #CEDFF9;
+
+        .room-name {
+            color: #3F7CEA;
+        }
     }
 
     .active-room {
-        background: #3F7CEA;
+        background-color: #3F7CEA;
 
         .room-name {
             color: #FFFFFF;
@@ -122,7 +135,7 @@
 
     .etc-room {
         position: absolute;
-        background: #F6F6F6;
+        background-color: #F6F6F6;
         border: 1px solid #FFFFFF;
     }
 
@@ -329,4 +342,8 @@
         top: 179.9px;
     }
 
+}
+
+.meeting-room-input {
+    background-color: #CEDFF9;
 }
