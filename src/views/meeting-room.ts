@@ -87,6 +87,9 @@ export class LeftNavMeetingRoomBox extends BaseTag {
     public changeMeetingRoomStatus(schedule: EventItem[]) {
         const now = getNowTime();
 
+        this.content.querySelectorAll(".meeting-room.active-room")
+            .forEach(activeRoom => activeRoom.classList.remove("active-room"));
+
         schedule.filter(schedule =>
             isLocationString(schedule.location) &&
             getTime(schedule.start.dateTime) <= now &&
@@ -97,6 +100,10 @@ export class LeftNavMeetingRoomBox extends BaseTag {
         });
 
         this.content.querySelectorAll(".room-name").forEach(roomName => roomName.classList.add("show-name"));
+
+        setTimeout(() => {
+            this.changeMeetingRoomStatus(schedule);
+          }, 60000);
     }
 
     public addCalendarButtonEvent() {
