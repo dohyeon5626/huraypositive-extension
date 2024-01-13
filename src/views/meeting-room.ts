@@ -107,17 +107,16 @@ export class LeftNavMeetingRoomBox extends BaseTag {
     }
 
     public addCalendarButtonEvent() {
-        document.querySelectorAll("#tkQpTb .XXcuqd").forEach(buttonBox => {
-            const location = buttonBox.querySelector("span")!!.textContent!!;
-            if (isLocationString(location)) {
-                const inputBox = buttonBox.querySelector("input")!!;
-                const meetingRoomBox = this.content.querySelector(`.${getLocationClass(location)}`)!!;
-
-                meetingRoomBox.addEventListener('click', (event) => inputBox.click());
-                meetingRoomBox.addEventListener('mouseover', (event) => buttonBox.classList.add("meeting-room-input"));
-                meetingRoomBox.addEventListener('mouseout', (event) => buttonBox.classList.remove("meeting-room-input"));
-            }
-        });
+        this.content.querySelectorAll(".meeting-room").forEach(meetingRoom => {
+            Array.from(document.querySelectorAll("#tkQpTb .XXcuqd")).filter(buttonBox => {
+                const location = buttonBox.querySelector("span")!!.textContent!!;
+                return meetingRoom.classList.contains(getLocationClass(location));
+            }).forEach(buttonBox => {
+                meetingRoom.addEventListener('click', (event) => buttonBox.querySelector("input")!!.click());
+                meetingRoom.addEventListener('mouseover', (event) => buttonBox.classList.add("meeting-room-input"));
+                meetingRoom.addEventListener('mouseout', (event) => buttonBox.classList.remove("meeting-room-input"));
+            })
+        })
     }
 
 }
