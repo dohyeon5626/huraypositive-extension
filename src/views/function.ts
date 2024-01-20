@@ -1,9 +1,36 @@
-import { saveFunctionActive } from "../api/chrome";
-import { BaseTag } from "./base";
+import { getIsTest, saveFunctionActive, saveIsTest } from '../api/chrome';
+import { BaseTag } from './base';
 
 export class FunctionBox extends BaseTag {
+
+    private testCount = 0;
+
     constructor() {
         super(`<div id="function-box"></div>`);
+    }
+
+    public addTestActiveEvent() {
+        this.content.onclick = async (e) => {
+            if ((e.target!! as HTMLElement).id == "function-box") {
+                this.testCount++;
+                if (this.testCount == 5) {
+                    this.testCount = 0;
+                    const isTest = await getIsTest();
+                    
+                    if (!isTest) {
+                        this.content.style.backgroundColor = "#FF0000";
+                        saveIsTest(true);
+                    } else {
+                        this.content.style.backgroundColor = "#0000FF";
+                        saveIsTest(false);
+                    }
+
+                    setTimeout(() => {
+                        this.content.style.backgroundColor = "#FFFFFF";
+                    }, 1000);
+                }
+            }
+        }
     }
 }
 

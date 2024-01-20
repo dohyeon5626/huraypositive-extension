@@ -1,10 +1,12 @@
 import { getFunctionActiveMap, getUserEmail } from '../api/chrome';
-import { FUNCTION, BASE_FUNC_INDEX_MAP } from '../func-base';
+import { BASE_FUNC_INDEX_MAP, FUNCTION } from '../func-base';
 import { Function, FunctionBox } from '../views/function';
 import { TextBox, TextType } from '../views/text';
 
-const box = new FunctionBox();
-getUserEmail().then(email => {
+(async () => {
+    const email = await getUserEmail();
+    const box = new FunctionBox();
+
     if (email.includes("huray.net")) {
         getFunctionActiveMap().then(functionActiveMap => {
             Array.from(functionActiveMap)
@@ -18,5 +20,5 @@ getUserEmail().then(email => {
         box.addTag(new TextBox('Huray Positive 계정만 사용이 가능합니다.', TextType.INVALID));
     }
     box.arrangeBase();
-}
-);
+    box.addTestActiveEvent();
+})();
