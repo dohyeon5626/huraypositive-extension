@@ -51,7 +51,7 @@ const statusBox = `
                 `;
 
 const isLocationString = (location: string | null) => {
-    return location && location.startsWith("휴레이-7층-");
+    return location?.startsWith("휴레이-7층-");
 }
 
 const getLocationClass = (location: string) => {
