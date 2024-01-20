@@ -1,5 +1,6 @@
+import { getTodayCompanySchedule } from '../api/google';
 import { EventItem } from '../type/google-response';
-import { getNowTime, getTime } from '../util/date';
+import { getNowMinutes, getNowSeconds, getNowTime, getTime } from '../util/date';
 import { BaseTag } from './base';
 
 const statusBox = `
@@ -101,9 +102,13 @@ export class LeftNavMeetingRoomBox extends BaseTag {
 
         this.content.querySelectorAll(".room-name").forEach(roomName => roomName.classList.add("show-name"));
 
-        setTimeout(() => {
-            this.changeMeetingRoomStatus(schedule);
-          }, 60000);
+        setTimeout(async () => {
+            if (getNowMinutes() == 0 || getNowMinutes() == 30) {
+                this.changeMeetingRoomStatus(await getTodayCompanySchedule());
+            } else {
+                this.changeMeetingRoomStatus(schedule);
+            }
+          }, (60 - getNowSeconds()) * 1000);
     }
 
     public addCalendarButtonEvent() {

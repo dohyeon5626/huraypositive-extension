@@ -9,3 +9,11 @@ export const getTime = (dateTime: string) => {
 export const getNowTime = () => {
     return new Date().getTime();
 }
+
+export const getNowMinutes = () => {
+    return new Date().getMinutes();
+}
+
+export const getNowSeconds = () => {
+    return new Date().getSeconds();
+}
