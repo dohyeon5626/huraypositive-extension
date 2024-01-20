@@ -1,3 +1,4 @@
+import { TestLogger } from '../etc/test-mode';
 import { EventItem } from '../type/google-response';
 import { getNowTime, getTime } from '../util/date';
 import { BaseTag } from './base';
@@ -66,6 +67,8 @@ const getLocationClass = (location: string) => {
 }
 
 export class LeftNavMeetingRoomBox extends BaseTag {
+
+    private logger = new TestLogger("[LeftNavMeetingRoomBox]");
     
     public static isExistCalendarLeftNav () {
         return document.querySelectorAll(`.hEtGGf.HDIIVe.sBn5T > .left-nav-meeting-room-box`).length > 0
@@ -81,15 +84,21 @@ export class LeftNavMeetingRoomBox extends BaseTag {
     }
 
     public arrangeCalendarLeftNav() {
+        this.logger.print("[START] arrangeCalendarLeftNav");
         this.arrangeBehindPosition(document.querySelector(`div[jscontroller="vYumwc"]`)!!);
+        this.logger.print("[END] arrangeCalendarLeftNav");
     }
 
     public changeMeetingRoomStatus(schedule: EventItem[]) {
+        this.logger.multiPrint("[START] changeMeetingRoomStatus", schedule);
         const now = getNowTime();
 
+        this.logger.print("[START] changeMeetingRoomStatus clear active");
         this.content.querySelectorAll(".meeting-room.active-room")
             .forEach(activeRoom => activeRoom.classList.remove("active-room"));
+        this.logger.print("[END] changeMeetingRoomStatus clear active");
 
+        this.logger.print("[START] changeMeetingRoomStatus set active");
         schedule.filter(schedule =>
             isLocationString(schedule.location) &&
             getTime(schedule.start.dateTime) <= now &&
@@ -98,15 +107,21 @@ export class LeftNavMeetingRoomBox extends BaseTag {
         .forEach(location => {
             this.content.querySelector("." + location)?.classList.add("active-room");
         });
+        this.logger.print("[END] changeMeetingRoomStatus set active");
 
+        this.logger.print("[START] changeMeetingRoomStatus show name");
         this.content.querySelectorAll(".room-name").forEach(roomName => roomName.classList.add("show-name"));
+        this.logger.print("[END] changeMeetingRoomStatus show name");
 
         setTimeout(() => {
             this.changeMeetingRoomStatus(schedule);
-          }, 60000);
+        }, 60000);
+
+        this.logger.print("[END] changeMeetingRoomStatus");
     }
 
     public addCalendarButtonEvent() {
+        this.logger.print("[START] addCalendarButtonEvent");
         this.content.querySelectorAll(".meeting-room").forEach(meetingRoom => {
             Array.from(document.querySelectorAll("#tkQpTb .XXcuqd")).filter(buttonBox => {
                 const location = buttonBox.querySelector("span")!!.textContent!!;
@@ -116,12 +131,15 @@ export class LeftNavMeetingRoomBox extends BaseTag {
                 meetingRoom.addEventListener('mouseover', (event) => buttonBox.classList.add("meeting-room-input"));
                 meetingRoom.addEventListener('mouseout', (event) => buttonBox.classList.remove("meeting-room-input"));
             })
-        })
+        });
+        this.logger.print("[END] addCalendarButtonEvent");
     }
 
 }
 
 export class ScheduleMeetingRoomBox extends BaseTag {
+
+    private logger = new TestLogger("[ScheduleMeetingRoomBox]");
 
     constructor() {
         super(`<div class="schedule-meeting-room-box">${statusBox}</div>`);
@@ -136,6 +154,7 @@ export class ScheduleMeetingRoomBox extends BaseTag {
     }
 
     public arrangeCalendarInfoSchedule() {
+        this.logger.print("[START] arrangeCalendarInfoSchedule");
         const position = document.querySelector(`.Mz3isd > .nBzcnc.OcVpRe:not(.OjZ2cc.IyS93d.N1DhNb)`)!!;
 
         const location = position.querySelector(".p9T8o")!!.textContent!!;
@@ -144,5 +163,6 @@ export class ScheduleMeetingRoomBox extends BaseTag {
             this.content.querySelectorAll(".room-name").forEach(roomName => roomName.classList.add("show-name"));
             this.arrangeBehindPosition(position as HTMLElement);
         }
+        this.logger.print("[END] arrangeCalendarInfoSchedule");
     }
 }

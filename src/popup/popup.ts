@@ -1,5 +1,5 @@
 import { getFunctionActiveMap, getUserEmail } from '../api/chrome';
-import { BASE_FUNC_INDEX_MAP, FUNCTION } from '../func-base';
+import { BASE_FUNC_INDEX_MAP, FUNCTION } from '../etc/func-base';
 import { Function, FunctionBox } from '../views/function';
 import { TextBox, TextType } from '../views/text';
 

@@ -1,5 +1,5 @@
-import { addTabUpdatedListener, applySheetAndScript, executeScript, getFunctionActiveMap } from "../api/chrome";
-import { FUNCTION } from "../func-base";
+import { addTabUpdatedListener, applySheetAndScript, getFunctionActiveMap } from '../api/chrome';
+import { FUNCTION } from '../etc/func-base';
 
 addTabUpdatedListener(
     async (url, tabId) => {
@@ -10,7 +10,7 @@ addTabUpdatedListener(
         else if (functionActiveMap.get(FUNCTION.SPREADSHEET_SEARCH) && url.startsWith("https://docs.google.com/spreadsheets")) {
             applySheetAndScript(tabId, "spread-search.css", "spread-search-content.js");
         }
-        else if (functionActiveMap.get(FUNCTION.SWAGGER_JSON) && url.includes("huray") && url.includes("swagger")) {
+        else if (functionActiveMap.get(FUNCTION.SWAGGER_JSON) && url.includes("huray")) {
             applySheetAndScript(tabId, "swagger-content.css", "swagger-content.js");
         }
     }
