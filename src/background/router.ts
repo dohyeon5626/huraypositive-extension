@@ -1,5 +1,5 @@
-import { addTabUpdatedListener, applySheetAndScript, executeScript, getFunctionActiveMap } from "../api/chrome";
-import { FUNCTION } from "../func-base";
+import { addTabUpdatedListener, applySheetAndScript, getFunctionActiveMap } from '../api/chrome';
+import { FUNCTION } from '../func-base';
 
 addTabUpdatedListener(
     async (url, tabId) => {
