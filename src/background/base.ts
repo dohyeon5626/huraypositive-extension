@@ -1,5 +1,5 @@
 import { refreshFunctionActiveMap, getUserEmail } from "../api/chrome";
-import { BASE_FUNC_ACTIVE_MAP } from "../func-base";
+import { BASE_FUNC_ACTIVE_MAP } from "../etc/func-base";
 
 refreshFunctionActiveMap(BASE_FUNC_ACTIVE_MAP);
 

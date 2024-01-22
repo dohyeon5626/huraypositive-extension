@@ -98,3 +98,15 @@ export const sendMessage = (action: any) => {
         chrome.runtime.sendMessage(action, value => resolve(value));
     });
 }
+
+export const getIsTest = () => {
+    return new Promise<boolean>((resolve) => {
+        chrome.storage.sync.get(['isTest'], it => resolve(it.isTest));
+    });
+}
+
+export const saveIsTest = (isTest: boolean) => {
+    return new Promise<void>((resolve) => {
+        chrome.storage.sync.set({ isTest: isTest }, resolve);
+    });
+}
