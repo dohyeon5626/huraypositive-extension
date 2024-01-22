@@ -15,7 +15,12 @@ export class SpreadSearchBar extends BaseTag {
     public putSearchBar() {
         const searchBar = this.content as HTMLInputElement;
         const target = document.getElementById('waffle-disclaimer-bar')?.nextSibling?.firstChild!! as HTMLElement
+
         target?.append(searchBar);
+        
+        searchBar.addEventListener("keydown", (event) => {
+            if (event.key == "Enter") event.preventDefault();
+        });
 
         searchBar.addEventListener("keyup", () => {
             const searchValue = searchBar.value;
