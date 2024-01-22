@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { getGoogleOauthToken, refreshGoogleOauthToken } from '../message/message-sender';
-import { Calendar, CalendarItem, Event, EventItem } from '../type/google-response';
+import { Calendar, Event, EventItem } from '../type/google-response';
 import { getTodayDateString } from '../util/date';
 
 let googleToken: string;

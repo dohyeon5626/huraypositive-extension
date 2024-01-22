@@ -1,6 +1,7 @@
 import { TestLogger } from '../etc/test-mode';
+import { getTodayCompanySchedule } from '../api/google';
 import { EventItem } from '../type/google-response';
-import { getNowTime, getTime } from '../util/date';
+import { getNowMinutes, getNowSeconds, getNowTime, getTime } from '../util/date';
 import { BaseTag } from './base';
 
 const statusBox = `
@@ -52,7 +53,7 @@ const statusBox = `
                 `;
 
 const isLocationString = (location: string | null) => {
-    return location && location.startsWith("휴레이-7층-");
+    return location?.startsWith("휴레이-7층-");
 }
 
 const getLocationClass = (location: string) => {
@@ -113,10 +114,14 @@ export class LeftNavMeetingRoomBox extends BaseTag {
         this.content.querySelectorAll(".room-name").forEach(roomName => roomName.classList.add("show-name"));
         this.logger.print("[END] changeMeetingRoomStatus show name");
 
-        setTimeout(() => {
-            this.changeMeetingRoomStatus(schedule);
-        }, 60000);
-
+        setTimeout(async () => {
+            if (getNowMinutes() == 0 || getNowMinutes() == 30) {
+                this.changeMeetingRoomStatus(await getTodayCompanySchedule());
+            } else {
+                this.changeMeetingRoomStatus(schedule);
+            }
+          }, (60 - getNowSeconds()) * 1000);
+      
         this.logger.print("[END] changeMeetingRoomStatus");
     }
 
