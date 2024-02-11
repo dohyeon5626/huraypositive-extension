@@ -127,17 +127,65 @@ export class LeftNavMeetingRoomBox extends BaseTag {
 
     public addCalendarButtonEvent() {
         this.logger.print("[START] addCalendarButtonEvent");
+        this.setFakeCheckBoxList();
+
         this.content.querySelectorAll(".meeting-room").forEach(meetingRoom => {
-            Array.from(document.querySelectorAll("#tkQpTb .XXcuqd")).filter(buttonBox => {
-                const location = buttonBox.querySelector("span")!!.textContent!!;
-                return meetingRoom.classList.contains(getLocationClass(location));
-            }).forEach(buttonBox => {
-                meetingRoom.addEventListener('click', (event) => buttonBox.querySelector("input")!!.click());
-                meetingRoom.addEventListener('mouseover', (event) => buttonBox.classList.add("meeting-room-input"));
-                meetingRoom.addEventListener('mouseout', (event) => buttonBox.classList.remove("meeting-room-input"));
-            })
+            meetingRoom.addEventListener('click', (event) => {
+                this.fakeCheckBoxList().filter(buttonBox => this.isCorrectLocationButton(meetingRoom, buttonBox))
+                    .forEach(buttonBox => buttonBox.querySelector("input")!!.click());
+            });
+
+            meetingRoom.addEventListener('mouseover', (event) => {
+                this.realCheckBoxList().filter(buttonBox => this.isCorrectLocationButton(meetingRoom, buttonBox))
+                    .forEach(buttonBox => buttonBox.classList.add("meeting-room-input"));
+            });
+
+            meetingRoom.addEventListener('mouseout', (event) => {
+                this.realCheckBoxList().filter(buttonBox => this.isCorrectLocationButton(meetingRoom, buttonBox))
+                    .forEach(buttonBox => buttonBox.classList.remove("meeting-room-input"));
+            });
         });
         this.logger.print("[END] addCalendarButtonEvent");
+    }
+
+    private setFakeCheckBoxList() {
+        const scrollBox = document.querySelector(".hEtGGf.HDIIVe.sBn5T")!!;
+        
+        scrollBox.scrollTop = scrollBox.scrollHeight;
+        const finderIntervalId = setInterval(() => {
+            this.logger.print("[START] find realCheckBoxList");
+            const checkBoxList = this.realCheckBoxList();
+
+            if (checkBoxList.length >= 9) {
+                checkBoxList.forEach(buttonBox => {
+                    const fakeElement = buttonBox.cloneNode(true);
+                    (fakeElement as HTMLElement).style.display = 'none';
+                    document.querySelector("#dws12b")?.append(fakeElement);
+                });
+                scrollBox.scrollTop = 0;
+                clearInterval(finderIntervalId);
+                this.logger.print("[END] find realCheckBoxList");
+            }
+        }, 500);
+            
+        setTimeout(() => {
+            clearInterval(finderIntervalId);
+        }, 10000);
+    }
+
+    private realCheckBoxList() {
+        return Array.from(document.querySelectorAll("#tkQpTb .XXcuqd .nBzcnc.d6wfac.Wm6kRe.OcVpRe.qZvm2d-ibnC6b"))
+            .filter(buttonBox => buttonBox.querySelector("span")!!.textContent!!.startsWith("휴레이-7층"));
+    }
+
+    private fakeCheckBoxList() {
+        return Array.from(document.querySelectorAll("#dws12b .nBzcnc.d6wfac.Wm6kRe.OcVpRe.qZvm2d-ibnC6b"))
+            .filter(buttonBox => buttonBox.querySelector("span")!!.textContent!!.startsWith("휴레이-7층"));
+    }
+
+    private isCorrectLocationButton(meetingRoomBox: Element, buttonBox: Element) {
+        const location = buttonBox.querySelector("span")!!.textContent!!;
+        return meetingRoomBox.classList.contains(getLocationClass(location));
     }
 
 }

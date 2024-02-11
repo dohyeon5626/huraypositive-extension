@@ -1,4 +1,4 @@
-import { getTodayCompanySchedule, addMissingMeetingRoomCalendar } from '../api/google';
+import { addMissingMeetingRoomCalendar, getTodayCompanySchedule } from '../api/google';
 import { TestLogger } from '../etc/test-mode';
 import { LeftNavMeetingRoomBox, ScheduleMeetingRoomBox } from '../views/meeting-room';
 
@@ -13,8 +13,8 @@ logger.print("[START]" + window.location.href);
         const meetingRoomBox = new LeftNavMeetingRoomBox();
 
         meetingRoomBox.arrangeCalendarLeftNav();
-        meetingRoomBox.changeMeetingRoomStatus(await getTodayCompanySchedule());
         meetingRoomBox.addCalendarButtonEvent();
+        meetingRoomBox.changeMeetingRoomStatus(await getTodayCompanySchedule());   
         logger.print("[END] exist calendar left nav");
     }
 })();
