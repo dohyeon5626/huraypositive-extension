@@ -169,7 +169,6 @@ export class LeftNavMeetingRoomBox extends BaseTag {
         }, 500);
             
         setTimeout(() => {
-            this.logger.print("[FAIL] find realCheckBoxList");
             clearInterval(finderIntervalId);
         }, 10000);
     }
