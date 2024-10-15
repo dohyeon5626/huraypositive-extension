@@ -67,27 +67,27 @@ export const saveFunctionActive = async (functionName: string, isFunctionActive:
     saveFunctionActiveMap(functionActiveMap);
 }
 
-export const getGoogleOauthToken = () => {
-    return new Promise<string>(resolve => {
-        chrome.identity.getAuthToken({ interactive: true }, (token) => {
-            if (token) {
-                resolve(token);
-            }
-        });
-    });
-}
+// export const getGoogleOauthToken = () => {
+//     return new Promise<string>(resolve => {
+//         chrome.identity.getAuthToken({ interactive: true }, (token) => {
+//             if (token) {
+//                 resolve(token);
+//             }
+//         });
+//     });
+// }
 
-export const refreshGoogleOauthToken = () => chrome.identity.clearAllCachedAuthTokens();
+// export const refreshGoogleOauthToken = () => chrome.identity.clearAllCachedAuthTokens();
 
-export const getUserEmail = (): Promise<string> => {
-    return new Promise<string>(resolve => {
-        chrome.identity.getProfileUserInfo(
-            { accountStatus: chrome.identity.AccountStatus.ANY },
-            (user_info) => {
-                resolve(user_info.email);
-            });
-    });
-}
+// export const getUserEmail = (): Promise<string> => {
+//     return new Promise<string>(resolve => {
+//         chrome.identity.getProfileUserInfo(
+//             { accountStatus: chrome.identity.AccountStatus.ANY },
+//             (user_info) => {
+//                 resolve(user_info.email);
+//             });
+//     });
+// }
 
 export const addMessageListener = (func: (request: any, callback: (response: any) => void) => void) => {
     chrome.runtime.onMessage.addListener((request, sender, callback) => func(request, callback));
